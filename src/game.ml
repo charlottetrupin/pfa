@@ -38,9 +38,9 @@ let init_game _dt =
   let _wall_bottom = Wall.create "wall_bottom" 0.0 580.0 Globals.canvas_height Globals.wall_thickness Texture.b in
   let _wall_left = Wall.create "wall_left" 0.0 0.0 Globals.wall_thickness Globals.canvas_width Texture.gray in  
   let _wall_right = Wall.create "wall_right" 780.0 0.0 Globals.wall_thickness Globals.canvas_width Texture.gray in  
-  let _platf1 = Plateforme.create "platf1" 400. 450. in 
-  let _plat =  Plateforme.generatePlateforme 50 400. 450. in 
- (* let _plat_test = Plateforme.create "test" 94.0 420.0 in
+  let _platf1 = Plateforme.create "platmilieu" 350. 450. in 
+   let _plat =  Plateforme.generatePlateforme 20 400. 450. in 
+ (* let _plat_test = Plateforme.create "test" 94.0 420.0 in 
   let _plat_test1 = Plateforme.create "test1" 130.0 370.0 in*)
   let player = Player.create "player" 100.0 100.0 in
   Game_state.init player;

@@ -3,6 +3,7 @@ open System_defs
 open Ecs
 
 let plat = Entity.Table.create 17
+let () = Random.self_init()
 
 let create name x y =
   let e = Entity.create () in
@@ -19,18 +20,25 @@ let create name x y =
   Collision_S.register e;
   Draw_S.register e;
   e
+  
  
 let rec generatePlateforme nb x y =
     match nb with
     |0 -> let angle = Random.float Globals.pi  in
-          let rx = ((cos angle) *. 50.) +. x in 
-          let ry = ((sin angle) *. 50.) +. y in 
-           create ("plateforme" ^ string_of_int nb) rx ry
+          let arc = ((Random.float 100.) +. 60.) in
+          let rx = (x -. ((cos angle) *. arc)) in 
+          let ry = (y -. ((sin angle) *. arc)) in
+          if  rx <= 20. || rx > 550. then let _truc =  Gfx.debug (Printf.sprintf "ici:%f;%f" rx ry) in                 generatePlateforme nb x y 
+          else let _truc =  Gfx.debug (Printf.sprintf "%f;%f" rx ry) in 
+          create ("plateforme" ^ string_of_int nb) rx ry ;
     |_ -> let angle = Random.float Globals.pi  in
-          let rx = ((cos angle) *. 50.) +. x in 
-          let ry = ((sin angle) *. 50.) +. y in 
-           create ("plateforme" ^ string_of_int nb) rx ry; generatePlateforme (nb-1) rx ry
+          let arc = ((Random.float 100.) +. 60.) in 
+          let rx = (x -. ((cos angle) *. arc)) in 
+          let ry = (y -. ((sin angle) *. arc)) in
+           if  rx <= 20. || rx > 550. then let _truc =  Gfx.debug (Printf.sprintf "ici:%f;%f" rx ry) in             generatePlateforme nb x y 
+           else let _truc =  Gfx.debug (Printf.sprintf "%f;%f" rx ry) in 
+              create ("plateforme" ^ string_of_int nb) rx ry ; generatePlateforme (nb-1) rx ry 
   
-
+ 
   
 let _is_plat e = Entity.Table.mem plat e
