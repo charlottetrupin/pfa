@@ -24,20 +24,15 @@ let create name x y =
  
 let rec generatePlateforme nb x y =
     match nb with
-    |0 -> let angle = Random.float Globals.pi  in
-          let arc = ((Random.float 100.) +. 60.) in
-          let rx = (x -. ((cos angle) *. arc)) in 
-          let ry = (y -. ((sin angle) *. arc)) in
-          if  rx <= 20. || rx > 550. then let _truc =  Gfx.debug (Printf.sprintf "ici:%f;%f" rx ry) in                 generatePlateforme nb x y 
-          else let _truc =  Gfx.debug (Printf.sprintf "%f;%f" rx ry) in 
-          create ("plateforme" ^ string_of_int nb) rx ry ;
+    | (-1) -> ()
     |_ -> let angle = Random.float Globals.pi  in
-          let arc = ((Random.float 100.) +. 60.) in 
-          let rx = (x -. ((cos angle) *. arc)) in 
-          let ry = (y -. ((sin angle) *. arc)) in
-           if  rx <= 20. || rx > 550. then let _truc =  Gfx.debug (Printf.sprintf "ici:%f;%f" rx ry) in             generatePlateforme nb x y 
-           else let _truc =  Gfx.debug (Printf.sprintf "%f;%f" rx ry) in 
-              create ("plateforme" ^ string_of_int nb) rx ry ; generatePlateforme (nb-1) rx ry 
+          let arcx = ((Random.float 150.) +. 60.) in 
+          let arcy = ((Random.float 60.) +. 10.) in
+          let rx = (x -. ((cos angle) *. arcx )) in 
+          let ry = (y -. ((sin angle) *. arcy )) in
+           if  rx <= 20. || rx > 550. then (*let _truc =  Gfx.debug (Printf.sprintf "ici:%f;%f" rx ry) in   *)          generatePlateforme nb x y 
+           else (*let _truc =  Gfx.debug (Printf.sprintf "%f;%f" rx ry) in *)
+              let _ = create ("plateforme" ^ string_of_int nb) rx ry in generatePlateforme (nb-1) rx ry 
   
  
   
