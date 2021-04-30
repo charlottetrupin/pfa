@@ -1,10 +1,10 @@
-# dune build
+# dune external-lib-deps --missing @@default
 # OCAMLPARAM: unset
-# Workspace root: /home/jovyan/ppfa_l3_info_tp06_answers
-$ /usr/bin/nproc > /tmp/dune84090a.output 2> /dev/null
-# Auto-detected concurrency: 32
+# Workspace root: /Users/aliciabec/GitHub/pfa/pfa
+$ /usr/bin/getconf _NPROCESSORS_ONLN > /var/folders/xg/v0y540gs7y78dnq5bv0dp0wc0000gn/T/duneb7faaa.output 2> /dev/null
+# Auto-detected concurrency: 4
 # disable binary cache
-$ /usr/bin/ocamlc.opt -config > /tmp/dune7d6ce3.output
+$ /usr/local/bin/ocamlc.opt -config > /var/folders/xg/v0y540gs7y78dnq5bv0dp0wc0000gn/T/duneb727e1.output
 # Dune context:
 #  { name = "default"
 #  ; kind = "default"
@@ -14,117 +14,99 @@ $ /usr/bin/ocamlc.opt -config > /tmp/dune7d6ce3.output
 #  ; fdo_target_exe = None
 #  ; build_dir = "default"
 #  ; toplevel_path = None
-#  ; ocaml_bin = External "/usr/bin"
-#  ; ocaml = External "/usr/bin/ocaml"
-#  ; ocamlc = External "/usr/bin/ocamlc.opt"
-#  ; ocamlopt = Some External "/usr/bin/ocamlopt.opt"
-#  ; ocamldep = External "/usr/bin/ocamldep.opt"
-#  ; ocamlmklib = External "/usr/bin/ocamlmklib.opt"
-#  ;
-#  env =
-#    map
-#      {
-#      "CAML_LD_LIBRARY_PATH" :
-#        "/home/jovyan/ppfa_l3_info_tp06_answers/_build/install/default/lib/stublibs"
-#      ; "DUNE_CONFIGURATOR" : "/usr/bin/ocamlc.opt"
-#      ; "INSIDE_DUNE" : "1"
-#      ;
-#      "MANPATH" :
-#        "/home/jovyan/ppfa_l3_info_tp06_answers/_build/install/default/bin"
-#      ;
-#      "OCAMLFIND_IGNORE_DUPS_IN" :
-#        "/home/jovyan/ppfa_l3_info_tp06_answers/_build/install/default/lib"
-#      ;
-#      "OCAMLPATH" :
-#        "/home/jovyan/ppfa_l3_info_tp06_answers/_build/install/default/lib"
-#      ; "OCAML_COLOR" : "always"
-#      ; "OPAMCOLOR" : "always"
-#      }
-#  ; findlib_path = [ External "/usr/lib/ocaml" ]
+#  ; ocaml_bin = External "/usr/local/bin"
+#  ; ocaml = Ok External "/usr/local/bin/ocaml"
+#  ; ocamlc = External "/usr/local/bin/ocamlc.opt"
+#  ; ocamlopt = Ok External "/usr/local/bin/ocamlopt.opt"
+#  ; ocamldep = Ok External "/usr/local/bin/ocamldep.opt"
+#  ; ocamlmklib = Ok External "/usr/local/bin/ocamlmklib.opt"
+#  ; env =
+#      map
+#        { "CAML_LD_LIBRARY_PATH" :
+#            "/Users/aliciabec/GitHub/pfa/pfa/_build/install/default/lib/stublibs"
+#        ; "DUNE_OCAML_HARDCODED" : "/usr/local/lib"
+#        ; "DUNE_OCAML_STDLIB" : "/usr/local/lib/ocaml"
+#        ; "DUNE_SOURCEROOT" : "/Users/aliciabec/GitHub/pfa/pfa"
+#        ; "INSIDE_DUNE" : "/Users/aliciabec/GitHub/pfa/pfa/_build/default"
+#        ; "MANPATH" :
+#            "/Users/aliciabec/GitHub/pfa/pfa/_build/install/default/bin"
+#        ; "OCAMLFIND_IGNORE_DUPS_IN" :
+#            "/Users/aliciabec/GitHub/pfa/pfa/_build/install/default/lib"
+#        ; "OCAMLPATH" :
+#            "/Users/aliciabec/GitHub/pfa/pfa/_build/install/default/lib"
+#        ; "OCAMLTOP_INCLUDE_PATH" :
+#            "/Users/aliciabec/GitHub/pfa/pfa/_build/install/default/lib/toplevel"
+#        ; "OCAML_COLOR" : "always"
+#        ; "OPAMCOLOR" : "always"
+#        }
+#  ; findlib_path = [ External "/usr/local/lib" ]
 #  ; arch_sixtyfour = true
 #  ; natdynlink_supported = true
 #  ; supports_shared_libraries = true
-#  ; opam_vars = map {}
-#  ;
-#  ocaml_config =
-#    { version = "4.08.1"
-#    ; standard_library_default = "/usr/lib/ocaml"
-#    ; standard_library = "/usr/lib/ocaml"
-#    ; standard_runtime = "the_standard_runtime_variable_was_deleted"
-#    ; ccomp_type = "cc"
-#    ; c_compiler = "x86_64-linux-gnu-gcc"
-#    ; ocamlc_cflags = [ "-O2"; "-fno-strict-aliasing"; "-fwrapv"; "-fPIC" ]
-#    ; ocamlopt_cflags = [ "-O2"; "-fno-strict-aliasing"; "-fwrapv" ]
-#    ;
-#    bytecomp_c_compiler =
-#      [ "x86_64-linux-gnu-gcc"
-#      ; "-O2"
-#      ; "-fno-strict-aliasing"
-#      ; "-fwrapv"
-#      ; "-fPIC"
-#      ; "-D_FILE_OFFSET_BITS=64"
-#      ; "-D_REENTRANT"
-#      ]
-#    ; bytecomp_c_libraries = [ "-lm"; "-ldl"; "-lpthread" ]
-#    ;
-#    native_c_compiler =
-#      [ "x86_64-linux-gnu-gcc"
-#      ; "-O2"
-#      ; "-fno-strict-aliasing"
-#      ; "-fwrapv"
-#      ; "-D_FILE_OFFSET_BITS=64"
-#      ; "-D_REENTRANT"
-#      ]
-#    ; native_c_libraries = [ "-lm"; "-ldl" ]
-#    ; cc_profile = [ "-pg" ]
-#    ; architecture = "amd64"
-#    ; model = "default"
-#    ; int_size = 63
-#    ; word_size = 64
-#    ; system = "linux"
-#    ; asm = [ "x86_64-linux-gnu-as" ]
-#    ; asm_cfi_supported = true
-#    ; with_frame_pointers = false
-#    ; ext_exe = ""
-#    ; ext_obj = ".o"
-#    ; ext_asm = ".s"
-#    ; ext_lib = ".a"
-#    ; ext_dll = ".so"
-#    ; os_type = "Unix"
-#    ; default_executable_name = "a.out"
-#    ; systhread_supported = true
-#    ; host = "x86_64-pc-linux-gnu"
-#    ; target = "x86_64-pc-linux-gnu"
-#    ; profiling = true
-#    ; flambda = false
-#    ; spacetime = false
-#    ; safe_string = false
-#    ; exec_magic_number = "Caml1999X025"
-#    ; cmi_magic_number = "Caml1999I025"
-#    ; cmo_magic_number = "Caml1999O025"
-#    ; cma_magic_number = "Caml1999A025"
-#    ; cmx_magic_number = "Caml1999Y025"
-#    ; cmxa_magic_number = "Caml1999Z025"
-#    ; ast_impl_magic_number = "Caml1999M025"
-#    ; ast_intf_magic_number = "Caml1999N025"
-#    ; cmxs_magic_number = "Caml1999D025"
-#    ; cmt_magic_number = "Caml1999T025"
-#    ; natdynlink_supported = true
-#    ; supports_shared_libraries = true
-#    ; windows_unicode = false
-#    }
-#  ;
-#  which =
-#    map
-#      { "ocaml" : Some External "/usr/bin/ocaml"
-#      ; "ocamlc" : Some External "/usr/bin/ocamlc.opt"
-#      ; "ocamlobjinfo" : Some External "/usr/bin/ocamlobjinfo.opt"
+#  ; ocaml_config =
+#      { version = "4.10.0"
+#      ; standard_library_default = "/usr/local/lib/ocaml"
+#      ; standard_library = "/usr/local/lib/ocaml"
+#      ; standard_runtime = "the_standard_runtime_variable_was_deleted"
+#      ; ccomp_type = "cc"
+#      ; c_compiler = "clang"
+#      ; ocamlc_cflags = [ "-O2"; "-fno-strict-aliasing"; "-fwrapv" ]
+#      ; ocamlc_cppflags = [ "-D_FILE_OFFSET_BITS=64"; "-D_REENTRANT" ]
+#      ; ocamlopt_cflags = [ "-O2"; "-fno-strict-aliasing"; "-fwrapv" ]
+#      ; ocamlopt_cppflags = [ "-D_FILE_OFFSET_BITS=64"; "-D_REENTRANT" ]
+#      ; bytecomp_c_compiler =
+#          [ "clang"
+#          ; "-O2"
+#          ; "-fno-strict-aliasing"
+#          ; "-fwrapv"
+#          ; "-D_FILE_OFFSET_BITS=64"
+#          ; "-D_REENTRANT"
+#          ]
+#      ; bytecomp_c_libraries = [ "-lm"; "-lpthread" ]
+#      ; native_c_compiler =
+#          [ "clang"
+#          ; "-O2"
+#          ; "-fno-strict-aliasing"
+#          ; "-fwrapv"
+#          ; "-D_FILE_OFFSET_BITS=64"
+#          ; "-D_REENTRANT"
+#          ]
+#      ; native_c_libraries = [ "-lm" ]
+#      ; cc_profile = []
+#      ; architecture = "amd64"
+#      ; model = "default"
+#      ; int_size = 63
+#      ; word_size = 64
+#      ; system = "macosx"
+#      ; asm = [ "clang"; "-arch"; "x86_64"; "-Wno-trigraphs"; "-c" ]
+#      ; asm_cfi_supported = true
+#      ; with_frame_pointers = false
+#      ; ext_exe = ""
+#      ; ext_obj = ".o"
+#      ; ext_asm = ".s"
+#      ; ext_lib = ".a"
+#      ; ext_dll = ".so"
+#      ; os_type = "Unix"
+#      ; default_executable_name = "a.out"
+#      ; systhread_supported = true
+#      ; host = "x86_64-apple-darwin19.5.0"
+#      ; target = "x86_64-apple-darwin19.5.0"
+#      ; profiling = false
+#      ; flambda = false
+#      ; spacetime = false
+#      ; safe_string = true
+#      ; exec_magic_number = "Caml1999X027"
+#      ; cmi_magic_number = "Caml1999I027"
+#      ; cmo_magic_number = "Caml1999O027"
+#      ; cma_magic_number = "Caml1999A027"
+#      ; cmx_magic_number = "Caml1999Y027"
+#      ; cmxa_magic_number = "Caml1999Z027"
+#      ; ast_impl_magic_number = "Caml1999M027"
+#      ; ast_intf_magic_number = "Caml1999N027"
+#      ; cmxs_magic_number = "Caml1999D027"
+#      ; cmt_magic_number = "Caml1999T027"
+#      ; natdynlink_supported = true
+#      ; supports_shared_libraries = true
+#      ; windows_unicode = false
 #      }
 #  }
-$ (cd _build/default && /usr/bin/ocamldep.opt -modules -impl src/player.ml) > _build/default/src/.game.objs/player.ml.d
-$ (cd _build/default && /usr/bin/ocamlc.opt -w -40 -g -bin-annot -I src/.game.objs/byte -I lib/ecs/.ecs.objs/byte -I lib/ecs/.ecs.objs/native -I lib/gfx/.gfx.objs/byte -I lib/gfx/.gfx.objs/native -no-alias-deps -open Game__ -o src/.game.objs/byte/game__Player.cmo -c -impl src/player.ml)
-$ (cd _build/default && /usr/bin/ocamlc.opt -w -40 -g -bin-annot -I src/.game.objs/byte -I lib/ecs/.ecs.objs/byte -I lib/ecs/.ecs.objs/native -I lib/gfx/.gfx.objs/byte -I lib/gfx/.gfx.objs/native -no-alias-deps -open Game__ -o src/.game.objs/byte/game.cmo -c -impl src/game.ml)
-$ (cd _build/default && /usr/bin/ocamlc.opt -w -40 -g -a -o src/game.cma src/.game.objs/byte/game__.cmo src/.game.objs/byte/game__Vector.cmo src/.game.objs/byte/game__Rect.cmo src/.game.objs/byte/game__Texture.cmo src/.game.objs/byte/game__Component_defs.cmo src/.game.objs/byte/game__Collision_system.cmo src/.game.objs/byte/game__Input_handler.cmo src/.game.objs/byte/game__Control_system.cmo src/.game.objs/byte/game__Draw_system.cmo src/.game.objs/byte/game__Force_system.cmo src/.game.objs/byte/game__Move_system.cmo src/.game.objs/byte/game__System_defs.cmo src/.game.objs/byte/game__Wall.cmo src/.game.objs/byte/game__Game_state.cmo src/.game.objs/byte/game__Player.cmo src/.game.objs/byte/game__Plateforme.cmo src/.game.objs/byte/game__Globals.cmo src/.game.objs/byte/game.cmo)
-$ (cd _build/default && /usr/bin/ocamlc.opt -w -40 -g -bin-annot -I prog/.game_js.eobjs/byte -I /usr/lib/ocaml/bytes -I /usr/lib/ocaml/js_of_ocaml -I /usr/lib/ocaml/uchar -I lib/ecs/.ecs.objs/byte -I lib/ecs/.ecs.objs/native -I lib/gfx/gfx_jsoo/.gfx_jsoo.objs/byte -I lib/gfx/gfx_jsoo/.gfx_jsoo.objs/native -I src/.game.objs/byte -I src/.game.objs/native -no-alias-deps -o prog/.game_js.eobjs/byte/dune__exe__Game_js.cmo -c -impl prog/game_js.pp.ml)
-$ (cd _build/default && /usr/bin/ocamlc.opt -w -40 -g -o prog/game_js.bc /usr/lib/ocaml/js_of_ocaml/js_of_ocaml.cma lib/ecs/ecs.cma lib/gfx/gfx_jsoo/gfx_jsoo.cma src/game.cma prog/.game_js.eobjs/byte/dune__exe__Game_js.cmo)
-$ (cd _build/default/prog && /usr/bin/js_of_ocaml --file=../resources/static/level.txt -I . -o game_js.bc.js --no-runtime /usr/lib/ocaml/js_of_ocaml-compiler/runtime.js ../resources/static/level.txt game_js.bc)

@@ -3,19 +3,26 @@ open Component_defs
 let init () = ()
 
 let update _dt el =
-  List.iteri (fun i e1 ->
-    List.iteri (fun j e2 ->
+    let e1 = List.hd el in
+    List.iter (fun e2 ->
       (* Une double boucle qui évite de comparer deux fois
          les objets : si on compare A et B, on ne compare pas B et A.
          Il faudra améliorer cela si on a beaucoup (> 30) objets simultanément.
       *)
-      if j > i then begin
+        (*Gfx.debug (Printf.sprintf "e1, e2 = %s, %s" (Name.get e1) (Name.get e2));*)
         (* les composants du rectangle r1 *)
         let pos1 = Position.get e1 in
         let box1 = Box.get e1 in
         (* les composants du rectangle r2 *)
         let pos2 = Position.get e2 in
         let box2 = Box.get e2 in
+
+        (*if Name.get e1 = "player" then Gfx.debug (Printf.sprintf "%s= %d" (Name.get e1) i);*)
+        (*Gfx.debug (Printf.sprintf "%s, %s = %f, %f" (Name.get e2) (Name.get e1) pos2.y (pos1.y));*)
+        if ((pos2.y) > (pos1.y +. 15.)) then begin
+(*        Gfx.debug (Printf.sprintf "%s, %s = %f, %f" (Name.get e2) (Name.get e1) pos2.y (pos1.y-. 32.));*)
+
+
         (* les vitesses *)
         let v1 = Velocity.get e1 in
         let v2 = Velocity.get e2 in
@@ -29,9 +36,9 @@ let update _dt el =
             let a = Vector.{ x = s_pos.x; y = 0.0} in
             let b = Vector.{ x = float s_rect.width +. s_pos.x; y = 0.0 } in
             let c = Vector.{ x = 0.0; y = s_pos.y } in
-            let d = Vector.{ x = 0.0; y = float s_rect.height +. s_pos.y} in 
+            let d = Vector.{ x = 0.0; y = float s_rect.height +. s_pos.y} in
             let n = List.fold_left (fun min_v v ->
-              if Vector.norm v  < Vector.norm min_v then v else min_v) 
+              if Vector.norm v  < Vector.norm min_v then v else min_v)
               d [a ; b; c]
             in
             (*  [4] rapport des vitesses et déplacement des objets *)
@@ -46,11 +53,13 @@ let update _dt el =
             Position.set e2 (Vector.add pos2 delta_pos2);
             if Resting.has_component e1 then Resting.set e1 (n == c);
             if Resting.has_component e2 then Resting.set e2 (n == c);
-            
+            (*if not collision pas en dessous then rien*)
+
+
              (* [10] appel des resolveurs *)
              if CollisionResolver.has_component e1 then (CollisionResolver.get e1) e1 e2;
              if CollisionResolver.has_component e2 then (CollisionResolver.get e2) e2 e1;
-         
+
             (* [5] On normalise n (on calcule un vecteur de même direction mais de norme 1) *)
             let n = Vector.normalize n in
             (* [6] Vitesse relative entre v2 et v1 *)
@@ -64,8 +73,8 @@ let update _dt el =
 
             (* normalisation des masses *)
             let m1 = Mass.get e1 in
-            let m2 = Mass.get e2 in    
-            let m1, m2 = 
+            let m2 = Mass.get e2 in
+            let m1, m2 =
               if Float.is_infinite m1 && Float.is_infinite m2 then
                 if n_v1 = 0.0 then m1, 1.0 else if n_v2 = 0.0 then 1.0, m2 else
                   0.0, 0.0
@@ -82,7 +91,7 @@ let update _dt el =
             (* [9] mise à jour des vitesses *)
             Velocity.set e1 new_v1;
             Velocity.set e2 new_v2;
-           
           end
       end
-      ) el) el
+      (*else  Gfx.debug (Printf.sprintf "coucou" );*)
+      ) (List.tl el)
