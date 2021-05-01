@@ -9,18 +9,21 @@ let init () =
 
 
 let update _dt el =
-  (*let yr = ref 0 in*)
   let ctx = Option.get !ctx in
   Gfx.clear_rect ctx 0 0 800 600;
-  (*let hmax = Globals.play_height in
-  let h = 32 in*)
+  (*let hmax = Globals.canvas_height in
+  let h = 32. in
+  let player = (List.hd el) in
+  let posj = (Position.get player) in
+  let yr = posj.y  in*)
+(*  Gfx.debug (Printf.sprintf "yr= %f" (yr));*)
   List.iter (fun e ->
     let pos = Position.get e in
     let box = Box.get e in
     let name = Name.get e in
     (*let xr = ref 0 in *)
-    if name != "player" then
-         Position.set e {x=pos.x; y=pos.y +. 0.5};
+    if (name <> "player") then  Position.set e {x=pos.x; y= pos.y +. 0.5(*yr*)};
+    if (name = "bg") then Position.set e {x=pos.x; y= pos.y +. 0.2(*yr*)};
 
     let pos = Position.get e in
     let surface = Surface.get e in
@@ -33,7 +36,8 @@ let update _dt el =
                           box.height
                           color
 
-    | Image render -> Gfx.blit_scale ctx render ((int_of_float pos.x))
+    | Image render -> (*let _ = Gfx.debug (Printf.sprintf "nom= %s" (name))in *)
+    Gfx.blit_scale ctx render ((int_of_float pos.x))
                                                 ((int_of_float pos.y))
                                                 box.width
                                                box.height

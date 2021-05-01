@@ -3,12 +3,20 @@ open Component_defs
 let init () = ()
 
 let update _dt el =
+  (*List.iteri (fun i e1 ->
+    let name1 = Name.get e1 in
+    if name1 = "player" then *)
     let e1 = List.hd el in
+    (*Gfx.debug (Printf.sprintf "e1= %s" (Name.get e1) );*)
+
+
+    (*let i = 0 in*)
     List.iter (fun e2 ->
       (* Une double boucle qui évite de comparer deux fois
          les objets : si on compare A et B, on ne compare pas B et A.
          Il faudra améliorer cela si on a beaucoup (> 30) objets simultanément.
       *)
+      (*if j > i then begin*)
         (*Gfx.debug (Printf.sprintf "e1, e2 = %s, %s" (Name.get e1) (Name.get e2));*)
         (* les composants du rectangle r1 *)
         let pos1 = Position.get e1 in
@@ -16,11 +24,16 @@ let update _dt el =
         (* les composants du rectangle r2 *)
         let pos2 = Position.get e2 in
         let box2 = Box.get e2 in
-
+        let name2 = Name.get e2 in
         (*if Name.get e1 = "player" then Gfx.debug (Printf.sprintf "%s= %d" (Name.get e1) i);*)
         (*Gfx.debug (Printf.sprintf "%s, %s = %f, %f" (Name.get e2) (Name.get e1) pos2.y (pos1.y));*)
-        if ((pos2.y) > (pos1.y +. 15.)) then begin
-(*        Gfx.debug (Printf.sprintf "%s, %s = %f, %f" (Name.get e2) (Name.get e1) pos2.y (pos1.y-. 32.));*)
+        if ((pos2.y) > (pos1.y +. 15.)
+        || (name2 = "wall_top")
+        || (name2 = "wall_bottom")
+        || (name2 = "wall_right")
+        || (name2 = "wall_left") )then begin
+        (*Gfx.debug (Printf.sprintf "coucou");
+        Gfx.debug (Printf.sprintf "%s, %s = %f, %f" (Name.get e2) (Name.get e1) pos2.y (pos1.y-. 32.));*)
 
 
         (* les vitesses *)

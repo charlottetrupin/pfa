@@ -9,15 +9,15 @@ type action = { mutable move_left : bool;
     }
 let action = { move_left = false; move_right = false ; jump = false}
 
-let create name x y =
+let create name img x y =
   let e = Entity.create () in
   (* components *)
   Position.set e {x = x; y = y };
-  Box.set e {width = 32 ; height = 32};
+  Box.set e {width = 35 ; height = 50};
   Velocity.set e { x = 0.0; y = 0.0 };
   Mass.set e 10.0;
   Name.set e name;
-  Surface.set e Texture.red;
+  Surface.set e (Texture.create_image img 35 50);
   Resting.set e false;
   SumForces.set e Vector.zero;
   (*CollisionResolver.set e is_resting;*)
@@ -28,7 +28,6 @@ let create name x y =
   Draw_S.register e;
   Force_S.register e;
   e
-
 
 
 let move fdir =
@@ -46,7 +45,7 @@ let do_move () =
   if action.move_right then move { x = 0.05 ; y = 0.0 };
   if r then begin
     move { x = 0.0; y = -0.35 };
-    Resting.set (Game_state.get_player ()) false  
+    Resting.set (Game_state.get_player ()) false
   end
 
 let jump () = action.jump <- true
