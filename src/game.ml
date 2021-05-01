@@ -1,4 +1,6 @@
 open Ecs
+open Component_defs
+
 let chain_functions f_list =
   let funs = ref f_list in
   fun dt -> match !funs with
@@ -9,10 +11,9 @@ let chain_functions f_list =
         funs := ll;
         true
       end
+      
  (*
 let load_level _dt =
-
-
   let ic = open_in "/static/level.txt" in
   let () =
     try
@@ -51,13 +52,19 @@ let init_game _dt =
   System.init_all ();
   false
 
-(*attention doit rendre false*)
 let play_game dt =
   Player.do_move ();
   System.update_all dt;
-  true
+  let player = Game_state.get_player () in 
+  let pos = Position.get player in
+  if(pos.y < (float_of_int(Globals.play_height) -. pos.y)/. 2.) then
+   true
+  else 
+  false 
 
-let game_over _dt = false
+let game_over _dt = 
+    (*let _ = Gfx.debug (Printf.sprintf "ici32:") in *)
+    false
 
 
 let run () = Gfx.main_loop
