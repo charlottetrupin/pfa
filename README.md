@@ -45,6 +45,7 @@ On s'attend à ce que dans le répertoire `src` se trouve un fichier `game.ml` p
 ## Construction du jeu 
 
 Il suffit de faire `dune build` à la racine. La cible construite par défaut est `_build/default/prog/game_js.bc.js` qui est incluse dans le fichier HTML `index.html`
+Pour jouer, appuyez sur les touches A et D de votre clavier, respectivement gauche et droite pour le déplacement du joueur. 
 
 
 ##  Dépendences
