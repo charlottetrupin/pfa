@@ -5,6 +5,7 @@ Cette archive contient un sequelette permetant de faire le projet de PFA en suiv
 
 ## Structure des répertoires 
 
+* `rapport` : répertoire dans lequel se situe le rapport
 * `resources` : répertoire dans lequel déposer les resources (images, polices, fichiers textes, …)
 * `lib`: répertoire contenant deux bibliothèques :
 	- `ecs`: La bibliothèque ECS telle qu'utilisée en TP. Elle définit les trois modules `Entity`, `Component` et `System`.
