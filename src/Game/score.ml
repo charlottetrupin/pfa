@@ -15,4 +15,4 @@ let create name =
 let maj_score player =
   let e = Game_state.get_score () in
   let pos = Position.get player in
-  Surface.set e (Texture.Text (("score:" ^ string_of_float ((pos.y -. float_of_int Globals.play_height)),"20px Arial",Gfx.color 0 0 0 255));
+  Surface.set e (Texture.Text (("score:" ^ string_of_float ((pos.y -. float_of_int Globals.play_height)),"20px Arial",Gfx.color 0 0 0 255)));
