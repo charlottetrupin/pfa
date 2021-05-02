@@ -22,8 +22,14 @@ let update _dt el =
     let box = Box.get e in
     let name = Name.get e in
     (*let xr = ref 0 in *)
-    if (name <> "player") then  Position.set e {x=pos.x; y= pos.y +. 0.5(*yr*)};
-    if (name = "bg") then Position.set e {x=pos.x; y= pos.y +. 0.2(*yr*)};
+    if (name <> "player" && name <> "score") then  Position.set e {x=pos.x; y= pos.y +. 0.5(*yr*)};
+    if (name = "bg")
+    || (name = "wall_top")
+    || (name = "wall_right")
+    || (name = "wall_left")
+    && ((name <> "score")
+    && (name <> "player"))
+    then Position.set e {x=pos.x; y= pos.y +. 0.2(*yr*)};
 
     let pos = Position.get e in
     let surface = Surface.get e in
@@ -36,7 +42,7 @@ let update _dt el =
                           box.height
                           color
 
-    | Image render -> (*let _ = Gfx.debug (Printf.sprintf "nom= %s" (name))in *)
+    | Image render ->
     Gfx.blit_scale ctx render ((int_of_float pos.x))
                                                 ((int_of_float pos.y))
                                                 box.width
@@ -47,7 +53,7 @@ let update _dt el =
                 let render = Texture.get_frame anim d in
                 Gfx.blit_scale ctx render ((int_of_float pos.x))
                          ((int_of_float pos.y)) box.width box.height
-    | Text (text, font, color) ->
+    | Text (text, font, color) -> Gfx.debug (Printf.sprintf "nom= %s" (name));
            Gfx.draw_text ctx text ((int_of_float pos.x))
                          ((int_of_float pos.y)) font color
     ) el;
