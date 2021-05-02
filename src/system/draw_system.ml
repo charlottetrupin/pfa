@@ -11,18 +11,11 @@ let init () =
 let update _dt el =
   let ctx = Option.get !ctx in
   Gfx.clear_rect ctx 0 0 800 600;
-  (*let hmax = Globals.canvas_height in
-  let h = 32. in
-  let player = (List.hd el) in
-  let posj = (Position.get player) in
-  let yr = posj.y  in*)
-(*  Gfx.debug (Printf.sprintf "yr= %f" (yr));*)
   List.iter (fun e ->
     let pos = Position.get e in
     let box = Box.get e in
     let name = Name.get e in
-    (*let xr = ref 0 in *)
-    if (name <> "player" && name <> "score" && name <> "end_img") then  Position.set e {x=pos.x; y= pos.y +. 0.5(*yr*)};
+    if (name <> "player" && name <> "score" && name <> "end_img") then  Position.set e {x=pos.x; y= pos.y +. 0.5};
     if (name = "bg")
     || (name = "wall_top")
     || (name = "wall_right")
@@ -30,7 +23,7 @@ let update _dt el =
     && ((name <> "end_img")
     && (name <> "score")
     && (name <> "player"))
-    then Position.set e {x=pos.x; y= pos.y +. 0.2(*yr*)};
+    then Position.set e {x=pos.x; y= pos.y +. 0.2};
 
     let pos = Position.get e in
     let surface = Surface.get e in
@@ -54,8 +47,7 @@ let update _dt el =
                 let render = Texture.get_frame anim d in
                 Gfx.blit_scale ctx render ((int_of_float pos.x))
                          ((int_of_float pos.y)) box.width box.height
-    | Text (text, font, color) -> Gfx.debug (Printf.sprintf "nom= %s" (name));
-           Gfx.draw_text ctx text ((int_of_float pos.x))
+    | Text (text, font, color) -> Gfx.draw_text ctx text ((int_of_float pos.x))
                          ((int_of_float pos.y)) font color
     ) el;
     Gfx.commit ctx
