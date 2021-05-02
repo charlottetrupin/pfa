@@ -2,6 +2,7 @@ open Ecs
 open Component_defs
 
 
+
 let chain_functions f_list =
   let funs = ref f_list in
   fun dt -> match !funs with
@@ -12,6 +13,29 @@ let chain_functions f_list =
         funs := ll;
         true
       end
+ (*
+let load_level _dt =
+  let ic = open_in "/static/level.txt" in
+  let () =
+    try
+      let count = ref 0 in
+      while true do
+        let line = input_line ic in
+        match String.split_on_char ',' line with
+          [ sx; sy; sw; sh ] ->
+          ignore (Wall.create ("wall" ^ string_of_int !count)
+		    (float_of_string sx)
+                    (float_of_string sy)
+                    (int_of_string sw)
+                    (int_of_string sh));
+                    count := !count + 1;
+	| _ ->  ()
+      done
+    with End_of_file -> ()
+  in
+  false
+*)
+
 
 
 let init_game _dt =
@@ -21,11 +45,11 @@ let init_game _dt =
   let _wall_left = Wall.create "wall_left" 0.0 (float_of_int (Globals.canvas_width - Globals.play_height)) Globals.wall_thickness (Globals.play_height) Texture.gray in
   let _wall_right = Wall.create "wall_right" (float_of_int (Globals.canvas_height - Globals.wall_thickness)) (float_of_int (Globals.canvas_width - Globals.play_height)) Globals.wall_thickness (Globals.play_height) Texture.gray in
 
-
   let _platf1 = Plateforme.create "platmilieu" Globals.plat_img (float_of_int (Globals.canvas_height/2)) (float_of_int ( Globals.canvas_width/2)) in
-  let _plat =  Plateforme.generatePlateforme 100 (float_of_int ((Globals.canvas_height/2)-10)) (float_of_int ( Globals.canvas_width/2))in
+  let _plat =  Plateforme.generatePlateforme 50 (float_of_int ((Globals.canvas_height/2)-10)) (float_of_int ( Globals.canvas_width/2))in
   let player = Player.create "player" Globals.per_img (float_of_int ((Globals.canvas_height/2)))  (float_of_int ((Globals.canvas_width/2)-150)) in
   let score = Score.create "score" in
+  
   let _bg = Bg.create "bg" Globals.bg_img in
   Game_state.init player score;
   Input_handler.register_command (KeyDown "a") (Player.run_left);
@@ -40,12 +64,16 @@ let play_game dt =
   let player = Game_state.get_player () in
   let _newScore = Score.maj_score player in
   let pos = Position.get player in
-  if(pos.y < (float_of_int(Globals.play_height) -. pos.y)/. 4.) then
+  if(pos.y < (float_of_int(Globals.play_height) -. pos.y)/. 2.) then
    true
-  else
-   false
+  else (
+   System.unregister_all ();
+   let _end = End.create "end_img" Globals.end_img in 
+   false )
 
-let game_over _dt = false
+let game_over dt =
+      System.update_all dt;
+   true
 
 let load_graphics _dt =
    not (Gfx.image_ready Globals.bg_img)
