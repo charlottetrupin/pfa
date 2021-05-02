@@ -22,12 +22,13 @@ let update _dt el =
     let box = Box.get e in
     let name = Name.get e in
     (*let xr = ref 0 in *)
-    if (name <> "player" && name <> "score") then  Position.set e {x=pos.x; y= pos.y +. 0.5(*yr*)};
+    if (name <> "player" && name <> "score" && name <> "end_img") then  Position.set e {x=pos.x; y= pos.y +. 0.5(*yr*)};
     if (name = "bg")
     || (name = "wall_top")
     || (name = "wall_right")
     || (name = "wall_left")
-    && ((name <> "score")
+    && ((name <> "end_img")
+    && (name <> "score")
     && (name <> "player"))
     then Position.set e {x=pos.x; y= pos.y +. 0.2(*yr*)};
 
