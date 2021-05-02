@@ -11,6 +11,8 @@ sig
 
   val unregister : Entity.t -> unit
   (* remove an entity from this system *)
+  
+  val unregister_all : unit -> unit
 
 end
 
@@ -27,7 +29,12 @@ struct
   let unregister e =
     Entity.Table.remove elem_table e;
     elem_list := List.filter (fun x -> x <> e) !elem_list
+    
+   let unregister_all () =
+   Entity.Table.reset elem_table;
+   elem_list := []
 
+   
   let init () = T.init ()
   let update dt =
     T.update dt !elem_list
@@ -37,6 +44,12 @@ let systems = ref []
 
 let register m =
   systems := m :: !systems
+  
+let unregister_all () = 
+   List.iter (fun m ->
+    let module M = (val m : S) in
+    M.unregister_all ()
+    ) !systems
 
 let init_all () =
   List.iter (fun m ->
