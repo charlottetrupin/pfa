@@ -21,6 +21,7 @@ let update _dt el =
     || (name = "wall_right")
     || (name = "wall_left")
     && ((name <> "end_img")
+    && (name <> "win_img"))
     && (name <> "score")
     && (name <> "player"))
     then Position.set e {x=pos.x; y= pos.y +. 0.2};
