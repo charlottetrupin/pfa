@@ -15,7 +15,7 @@ let update _dt el =
     let pos = Position.get e in
     let box = Box.get e in
     let name = Name.get e in
-    if (name <> "player" && name <> "score" && name <> "end_img") then  Position.set e {x=pos.x; y= pos.y +. 0.5};
+    if (name <> "player" && name <> "score" && name <> "end_img" && name <> "win_img") then  Position.set e {x=pos.x; y= pos.y +. 0.5};
     if (name = "bg")
     || (name = "wall_top")
     || (name = "wall_right")
