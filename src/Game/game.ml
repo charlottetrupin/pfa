@@ -41,7 +41,7 @@ let play_game dt =
   let player = Game_state.get_player () in
   let _newScore = Score.maj_score player in
   let pos = Position.get player in
-  if(pos.y < (float_of_int(Globals.play_height) -. pos.y)/. 4.) then
+  if(pos.y < (float_of_int(Globals.canvas_width)) then
       if (pos.y < (float_of_int(Globals.canvas_width - Globals.play_height + (Globals.canvas_width/2)))) then
           (System.unregister_all ();
           let _start = End.create "win_img" Globals.win_img in
